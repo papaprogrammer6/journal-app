@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التنقل المتجاوب</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&family=Zain:wght@200;300;400;700;800;900&display=swap');
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Zain", sans-serif;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .under-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .inface {
+            width: 100%;
+            position: relative;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .navbar {
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+        }
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .navbar li {
+            margin-bottom: 15px;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 50px;
+        }
+        .navbar a:hover {
+            background-color: #e9ecef;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #fff;
+            position: relative;
+        }
+        .des {
+            width: 90vw;
+            height: 40vh;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .logo {
+            width: 20vw;
+            height: 20vw;
+           
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .navbar {
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                padding: 10px;
+                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            }
+            .navbar ul {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                gap: 40px;
+            }
+            .navbar li {
+                margin-bottom: 0;
+            }
+            .navbar a {
+                padding: 10px 5px;
+                text-align: center;
+                margin-top: 0px;
+            }
+            .main-content {
+                margin-bottom: 60px;
+            }
+           
+          
+        }
+        @media (max-width:500px){
+            .logo {
+            width: 20vw;
+            height: 20vw;
+            position: absolute;
+            top: 19px;
+            right: 25px;
+            
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <ul>
+                <li><a href="news.html">الأخبار</a></li>
+                <li><a href="article.html">مقال</a></li>
+                <li><a href="event.html">حدث</a></li>
+                <li><a href="shop.html">متجر</a></li>
+            </ul>
+        </nav>
+        <div class="inface">
+            <main class="main-content">
+                <h1>مرحبا بكم في موقعنا</h1>
+                <div class="des">
+                    <p>مرحباً بالصحفيين الأعزاء، نقدم لكم هذه الصفحة التي تهدف إلى إرشادكم حول كيفية استخدام التطبيق بشكل فعال. نحن هنا لدعمكم وتزويدكم بكل ما تحتاجونه لتحقيق أفضل النتائج في عملكم الصحفي.</p>
+                    <p>في هذه الصفحة، ستتعلمون كيفية استعراض الأخبار، كتابة المقالات، وتحديث المعلومات المتعلقة بالأحداث. نحرص على أن يكون التطبيق سهل الاستخدام ويوفر لكم كافة الأدوات التي تحتاجونها لتبسيط عملية النشر والتفاعل مع القراء.</p>
+                    <p>إذا كنتم جدد في استخدام التطبيق، لا تترددوا في الاطلاع على دليل المستخدم الخاص بنا والذي يحتوي على خطوات مفصلة وشروحات حول كيفية الاستفادة من كافة الميزات المتاحة. كما نوفر لكم أيضاً دعم فني على مدار الساعة للإجابة على أي استفسارات قد تكون لديكم.</p>
+                    <p>نتمنى لكم تجربة متميزة ونجاحاً كبيراً في عملكم، ولا تترددوا في الاتصال بنا للحصول على أي مساعدة إضافية. نحن هنا لدعمكم في كل خطوة على الطريق.</p>
+                </div>
+               
+            </main>
+            <div class="under-content">
+                <img src="Design sans titre.png" alt="شعار الموقع" class="logo">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

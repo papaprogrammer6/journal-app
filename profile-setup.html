@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Setup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Set Up Your Profile</h1>
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="profilePhoto">Profile Photo:</label>
+                <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+            </div>
+            <button type="submit">Save Profile</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getAuth, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-storage.js";
+
+        // Firebase configuration object
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNeCcKGHaIPYEq2PwN4RfweXFdB2WZ78Q",
+            authDomain: "jc-fm-database.firebaseapp.com",
+            projectId: "jc-fm-database",
+            storageBucket: "jc-fm-database.appspot.com",
+            messagingSenderId: "430573474575",
+            appId: "1:430573474575:web:c872c4ecd6ebd8218b647a",
+            measurementId: "G-VBGHM4H0R2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const profilePhotoFile = document.getElementById('profilePhoto').files[0];
+            const user = auth.currentUser;
+
+            if (!user) {
+                document.getElementById('result').textContent = 'You must be logged in!';
+                return;
+            }
+
+            let photoUrl = '';
+
+            if (profilePhotoFile) {
+                const storageRef = ref(storage, 'profilePhotos/' + profilePhotoFile.name);
+                await uploadBytes(storageRef, profilePhotoFile);
+                photoUrl = await getDownloadURL(storageRef);
+            }
+
+            try {
+                await updateProfile(user, {
+                    displayName: username,
+                    photoURL: photoUrl || user.photoURL
+                });
+
+                await setDoc(doc(db, 'users', user.uid), {
+                    username: username,
+                    photoURL: photoUrl || user.photoURL
+                });
+
+                document.getElementById('result').textContent = 'Profile updated successfully!';
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 2000);
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

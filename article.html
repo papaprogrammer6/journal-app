@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1 user-scalable=no">
+    <title>إدارة المقالات</title>
+    <link rel="stylesheet" href="article.css">
+    <link rel="stylesheet" href="global.css">
+</head>
+
+<body>
+
+    <nav class="navbarpc">
+        <div class="left-side">
+            <div class="logo">
+                <img src="Design sans titre.png">
+            </div>
+            <div class="searchBar">
+                <ion-icon name="search-outline" class="icon"></ion-icon>
+                <input type="text" id="bar">
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="home.html"><iconify-icon icon="solar:home-bold-duotone" class="iconify"></iconify-icon></a></li>
+            <li><a href="news.html"><iconify-icon icon="emojione-monotone:newspaper" class="iconify"></iconify-icon></a></li>
+            <li><a href="article.html"><iconify-icon icon="game-icons:notebook" class="iconify active"></iconify-icon></a></li>
+            <li><a href="event.html"><iconify-icon icon="emojione-monotone:admission-tickets" class="iconify"></iconify-icon></a></li>
+            <li><a href="shop.html"><iconify-icon icon="emojione-monotone:shopping-cart" class="iconify"></iconify-icon></a></li>
+        </ul>
+
+        <div class="placeholder"></div>
+    </nav>
+
+    <main>
+
+        <div class="leftBar">
+            <div></div>
+        </div>
+
+        <div class="container">
+            <div class="createpost">
+                <div class="topside">
+                    <img src="" alt="" id="authorimg">
+                    <button id="createpost">اضغط هنا لإنشاء مقال جديد</button>
+                </div>
+                <div id="line"></div>
+                <div class="bottomside">
+                    <button id="getData">احصل على مقال معين</button>
+                    <button>فلتر</button>
+                </div>
+            </div>
+            <div id="articleModal" class="modal">
+                <div class="modal-content">
+                    <div class="hero">
+                        <h1>إنشاء مقال</h1>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="main-content">
+                        <form id="dataForm">
+                            <div class="form-group">
+                                <textarea id="articleTitle" name="articleTitle" required oninput="auto_grow(this)"
+                                    placeholder="عنوان المقال (مطلوب)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="articleDescreption" name="articleDescreption" required
+                                    oninput="auto_grow(this)" placeholder="وصف المقال (مطلوب)"></textarea>
+                            </div>
+                            <div class="form-group" id="mediaContainer">
+                                <label>تحميل صورة/فيديو:</label>
+                                <label for="articleMedia" class="custom-file-upload"><img src="media.png" alt=""></label>
+                                <input type="file" id="articleMedia" name="articleMedia" accept="image/*,video/*">
+                            </div>
+                            <button type="submit" id="submitArticle">إرسال</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="result"></div>
+            <div id="newsSection">
+                <!-- سيتم إضافة المحتوى تلقائيًا -->
+            </div>
+
+            <!-- نموذج التحرير -->
+
+            <div id="editFormContainer" class="modal">
+                <div class="modal-content">
+                    <div class="hero">
+                        <h1>تحرير المقال</h1>
+                    </div>
+                    <div class="main-content">
+                        <form id="editForm">
+                            <div class="form-group">
+                                <textarea id="editTitle" name="editTitle" required oninput="auto_grow(this)" placeholder="عنوان المقال (مطلوب)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="editDescription" name="editDescription" required oninput="auto_grow(this)" placeholder="وصف المقال (مطلوب)"></textarea>
+                            </div>
+                            <div class="form-group" id="mediaContainer">
+                                <label>تحميل صورة/فيديو:</label>
+                                <label for="editMedia" class="custom-file-upload"><img src="media.png" alt=""></label>
+                                <input type="file" id="editMedia" name="editMedia" accept="image/*,video/*">
+                            </div>
+                            <input type="hidden" id="editDocId">
+                            <input type="hidden" id="existingMediaUrl">
+                            <div class="editButton">
+                                <button type="submit" id="submitEditArticle">حفظ التعديلات</button>
+                                <button type="button" id="cancelEdit">إلغاء</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="rightBar">
+            <div></div>
+        </div>
+
+    </main>
+    <script src="articleFront.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+    <script type="module" src="article.js"></script>
+</body>
+
+</html>

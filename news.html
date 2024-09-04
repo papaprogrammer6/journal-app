@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>إدارة الأخبار</title>
+  <link rel="stylesheet" href="news.css" />
+  <link rel="stylesheet" href="global.css" />
+</head>
+
+<body>
+  <nav class="navbarpc">
+    <div class="left-side">
+      <div class="logo">
+        <img src="Design sans titre.png" />
+      </div>
+      <div class="searchBar">
+        <ion-icon name="search-outline" class="icon"></ion-icon>
+        <input type="text" id="bar" />
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li>
+        <a href="home.html"><iconify-icon icon="solar:home-bold-duotone" class="iconify"></iconify-icon></a>
+      </li>
+      <li>
+        <a href="news.html"><iconify-icon icon="emojione-monotone:newspaper"
+            class="iconify active"></iconify-icon></a>
+      </li>
+      <li>
+        <a href="article.html"><iconify-icon icon="game-icons:notebook" class="iconify"></iconify-icon></a>
+      </li>
+      <li>
+        <a href="event.html"><iconify-icon icon="emojione-monotone:admission-tickets"
+            class="iconify"></iconify-icon></a>
+      </li>
+      <li>
+        <a href="shop.html"><iconify-icon icon="emojione-monotone:shopping-cart"
+            class="iconify"></iconify-icon></a>
+      </li>
+    </ul>
+
+    <div class="placeholder"></div>
+  </nav>
+
+  <main>
+    <div class="leftBar">
+      <div></div>
+    </div>
+
+    <div class="container">
+      <div class="createpost">
+        <div class="topside">
+          <img src="" alt="" id="authorimg" />
+          <button id="createpost">
+            اضغط هنا لإنشاء منشور إخباري جديد
+          </button>
+        </div>
+        <div id="line"></div>
+        <div class="bottomside">
+          <button id="getData">احصل على أخبار محددة</button>
+          <button>فلتر</button>
+        </div>
+      </div>
+
+      <div id="newsModal" class="modal">
+        <div class="modal-content">
+          <div class="hero">
+            <h1>إنشاء منشور إخباري</h1>
+            <span class="close">&times;</span>
+          </div>
+          <div class="main-content">
+            <form id="dataForm">
+              <div class="form-group">
+                <textarea id="newsTitle" name="newsTitle" required oninput="auto_grow(this)"
+                  placeholder="عنوان الخبر (مطلوب)"></textarea>
+              </div>
+              <div class="form-group">
+                <textarea id="newsDescreption" name="newsDescreption" required oninput="auto_grow(this)"
+                  placeholder="وصف الخبر (مطلوب)"></textarea>
+              </div>
+              <div class="form-group" id="mediaContainer">
+                <label>تحميل صورة/فيديو:</label>
+                <label for="newsMedia" class="custom-file-upload"><img src="media.png" alt="" /></label>
+                <input type="file" id="newsMedia" name="newsMedia" accept="image/*,video/*" />
+              </div>
+              <div class="form-group">
+                <label>الفئة:</label>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryCulture" name="newsCategory" value="Culture" required />
+                    <label for="categoryCulture">ثقافة</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorypatriotism" name="newsCategory" value="patriotism" required />
+                    <label for="categorypatriotism">وطنية</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categoryinternational" name="newsCategory" value="international" required />
+                    <label for="categoryinternational">دولي</label>
+                  </div>
+                </div>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryregional" name="newsCategory" value="regional" required />
+                    <label for="categoryregional">إقليمي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorylocal" name="newsCategory" value="local" required />
+                    <label for="categorylocal">محلي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categoryeconomic" name="newsCategory" value="economic" required />
+                    <label for="categoryeconomic">اقتصادي</label>
+                  </div>
+                </div>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryPolitical" name="newsCategory" value="Political" required />
+                    <label for="categoryPolitical">سياسي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorycommunity" name="newsCategory" value="community" required />
+                    <label for="categorycommunity">مجتمع</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorytechnology" name="newsCategory" value="technology" required />
+                    <label for="categorytechnology">تكنولوجيا</label>
+                  </div>
+                </div>
+              </div>
+              <div class="radio-group">
+                <div>
+                  <input type="radio" id="categorysport" name="newsCategory" value="sport" required />
+                  <label for="categorysport">رياضة</label>
+                </div>
+                <div>
+                  <input type="radio" id="categoryhealth" name="newsCategory" value="health" required />
+                  <label for="categoryhealth">صحة</label>
+                </div>
+                <div>
+                  <input type="radio" id="categoryjc-fm" name="newsCategory" value="jc-fm" required />
+                  <label for="categoryjc-fm">jc-fm</label>
+                </div>
+              </div>
+              <button type="submit" id="submitNews">إرسال</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="result"></div>
+      <div id="newsSection"></div>
+
+      <div id="editFormContainer" class="modal">
+        <div class="modal-content">
+          <div class="hero">
+            <h1>تحرير المنشور الإخباري</h1>
+          </div>
+          <div class="main-content">
+            <form id="editForm">
+              <div class="form-group">
+                <textarea id="editTitle" name="editTitle" required oninput="auto_grow(this)"
+                  placeholder="عنوان الخبر (مطلوب)"></textarea>
+              </div>
+              <div class="form-group">
+                <textarea id="editDescription" name="editDescription" required oninput="auto_grow(this)"
+                  placeholder="وصف الخبر (مطلوب)"></textarea>
+              </div>
+              <div class="form-group" id="mediaContainer">
+                <label>تحميل صورة/فيديو:</label>
+                <label for="editMedia" class="custom-file-upload"><img src="media.png" alt="" /></label>
+                <input type="file" id="editMedia" name="editMedia" accept="image/*,video/*" />
+              </div>
+              <div class="form-group">
+                <label>الفئة:</label>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryCulture" name="editNewsCategory" value="Culture" required />
+                    <label for="categoryCulture">ثقافة</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorypatriotism" name="editNewsCategory" value="patriotism" required />
+                    <label for="categorypatriotism">وطنية</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categoryinternational" name="editNewsCategory" value="international" required />
+                    <label for="categoryinternational">دولي</label>
+                  </div>
+                </div>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryregional" name="editNewsCategory" value="regional" required />
+                    <label for="categoryregional">إقليمي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorylocal" name="editNewsCategory" value="local" required />
+                    <label for="categorylocal">محلي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categoryeconomic" name="editNewsCategory" value="economic" required />
+                    <label for="categoryeconomic">اقتصادي</label>
+                  </div>
+                </div>
+                <div class="radio-group">
+                  <div>
+                    <input type="radio" id="categoryPolitical" name="editNewsCategory" value="Political" required />
+                    <label for="categoryPolitical">سياسي</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorycommunity" name="editNewsCategory" value="community" required />
+                    <label for="categorycommunity">مجتمع</label>
+                  </div>
+                  <div>
+                    <input type="radio" id="categorytechnology" name="editNewsCategory" value="technology" required />
+                    <label for="categorytechnology">تكنولوجيا</label>
+                  </div>
+                </div>
+              </div>
+              <div class="radio-group">
+                <div>
+                  <input type="radio" id="categorysport" name="editNewsCategory" value="sport" required />
+                  <label for="categorysport">رياضة</label>
+                </div>
+                <div>
+                  <input type="radio" id="categoryhealth" name="editNewsCategory" value="health" required />
+                  <label for="categoryhealth">صحة</label>
+                </div>
+                <div>
+                  <input type="radio" id="categoryjc-fm" name="editNewsCategory" value="jc-fm" required />
+                  <label for="categoryjc-fm">jc-fm</label>
+                </div>
+              </div>
+              <input type="hidden" id="editDocId" />
+              <input type="hidden" id="existingMediaUrl" />
+              <div class="editButton">
+                <button type="submit" id="submitEditNews">
+                  حفظ التعديلات
+                </button>
+                <button type="button" id="cancelEdit">إلغاء</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rightBar">
+      <div></div>
+    </div>
+  </main>
+
+  <script src="newsFront.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+  <script type="module" src="news.js"></script>
+</body>
+
+</html>

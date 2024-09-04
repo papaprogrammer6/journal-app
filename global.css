@@ -1,0 +1,99 @@
+.active{
+   color: rgb(210, 175, 112);
+}
+.iconify{
+    transform: scale(2);
+}
+#bar ,.edit-delete button , .event-item button,.shop-item button,.news-item button,#submitEditNews,#cancelEdit,#submitEditArticle,#submitEditEvent,#submitEditShopItem {
+    font-family: "Zain", sans-serif;
+}
+/* Default styles for larger screens */
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+.news-item,.event-item,.shop-item {
+    direction: rtl;
+}
+
+/* Media query for screens with a max-width of 768px (tablets and mobile devices) */
+/* CSS for screen widths less than or equal to 808px */
+@media screen and (max-width: 808px) {
+    .nav-links {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #fff; /* Set background color to make it visible */
+        padding: 10px 40px 0 0;
+        border-top: 1px solid #ccc; /* Optional: Add a border at the top */
+        z-index: 1000; /* Ensure the navbar stays above other content */
+    }
+
+    .nav-links li {
+        flex-grow: 1;
+        text-align: center;
+    }
+    .news-item ,.event-item ,.shop-item{
+        padding-right: 40px;
+
+    }
+
+    .navbarpc .left-side {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff; /* Background color for visibility */
+        border-bottom: 1px solid #ccc; /* Optional: Border at the bottom */
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000; /* Ensure it stays above other content */
+    }
+
+    .navbarpc .searchBar {
+        display: flex; /* Show search bar */
+        width: 80%; /* Adjust width as needed */
+    }
+
+    .navbarpc .logo {
+        display: flex;
+        width: 20px;
+        height: 20px;
+         transform:translateY(-25px); /* Hide logo on small screens */
+    }
+}
+::-webkit-scrollbar {
+    width: 12px;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px 10px 0 0;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  #result{
+    font-family: "Zain", sans-serif;
+  }
+  .layout{
+    display: flex;
+    width: 100%;
+  }
