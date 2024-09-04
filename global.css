@@ -97,3 +97,6 @@
     display: flex;
     width: 100%;
   }
+textarea,.form-group{
+    direction: rtl;
+  }
