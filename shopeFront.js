@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflowY = "auto"; // Enable scroll
     
     // Optionally, reset the form
-    form.reset();
+    
   }
 
 
