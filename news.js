@@ -132,8 +132,8 @@ async function loadData() {
                         <p>الكاتب: ${data.author}</p>
                     </div>
                     ${data.mediaUrl ? (data.mediaType.startsWith('image/') ? 
-                        `<img src="${data.mediaUrl}" alt="الوسائط" style="max-width: 200px;">` : 
-                        `<video controls src="${data.mediaUrl}" style="max-width: 200px;"></video>`) : ''}
+                        `<img src="${data.mediaUrl}" alt="الوسائط" style="width: 100%;height: 300px;">` : 
+                        `<video controls src="${data.mediaUrl}" style="width: 100%;height: 300px;"></video>`) : ''}
                     <p>تم إنشاؤه في: ${data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleString() : 'غير متوفر'}</p>
                   <div class="layout">
                      <button onclick="openEditForm('${doc.id}', '${encodeForAttribute(data.Title)}', '${encodeForAttribute(data.description)}', '${data.mediaUrl}', '${data.category}')">تعديل</button>
