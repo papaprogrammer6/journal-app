@@ -118,8 +118,27 @@
             position: absolute;
             top: 19px;
             right: 25px;
+        }
+            #logout-button {
+            position:unset !important ;
+            border-radius:0 !important;
+            height: 50px;
+            }
             
         }
+        
+        #logout-button {
+            position: absolute;
+            top: 35px;
+            right: 10px;
+            background-color: #ac896d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10 ;
+            font-family: "Zain";
         }
     </style>
 </head>
@@ -133,6 +152,7 @@
                 <li><a href="shop.html">متجر</a></li>
             </ul>
         </nav>
+        <button id="logout-button">تسجيل الخروج</button>
         <div class="inface">
             <main class="main-content">
                 <h1>مرحبا بكم في موقعنا</h1>
@@ -150,4 +170,37 @@
         </div>
     </div>
 </body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+    const firebaseConfig = {
+            apiKey: "AIzaSyBNeCcKGHaIPYEq2PwN4RfweXFdB2WZ78Q",
+            authDomain: "jc-fm-database.firebaseapp.com",
+            projectId: "jc-fm-database",
+            storageBucket: "jc-fm-database.appspot.com",
+            messagingSenderId: "430573474575",
+            appId: "1:430573474575:web:c872c4ecd6ebd8218b647a",
+            measurementId: "G-VBGHM4H0R2"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+    
+    // Check if user is logged in
+    onAuthStateChanged(auth, (user) => {
+        if (!user) {
+            window.location.href = 'index.html';
+        }
+    });
+
+    document.getElementById('logout-button').addEventListener('click', () => {
+        signOut(auth).then(() => {
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }).catch((error) => {
+            console.error('Error signing out:', error);
+        });
+    });
+</script>
 </html>
