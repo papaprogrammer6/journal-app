@@ -257,106 +257,100 @@
     </div>
     
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBNeCcKGHaIPYEq2PwN4RfweXFdB2WZ78Q",
-            authDomain: "jc-fm-database.firebaseapp.com",
-            projectId: "jc-fm-database",
-            storageBucket: "jc-fm-database.appspot.com",
-            messagingSenderId: "430573474575",
-            appId: "1:430573474575:web:c872c4ecd6ebd8218b647a",
-            measurementId: "G-VBGHM4H0R2"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyBNeCcKGHaIPYEq2PwN4RfweXFdB2WZ78Q",
+        authDomain: "jc-fm-database.firebaseapp.com",
+        projectId: "jc-fm-database",
+        storageBucket: "jc-fm-database.appspot.com",
+        messagingSenderId: "430573474575",
+        appId: "1:430573474575:web:c872c4ecd6ebd8218b647a",
+        measurementId: "G-VBGHM4H0R2"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-        function showMessage(message) {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = message;
-            messageElement.classList.add('show');
+    function showMessage(message) {
+        const messageElement = document.getElementById('message');
+        messageElement.textContent = message;
+        messageElement.classList.add('show');
+        setTimeout(() => {
+            messageElement.classList.remove('show');
+        }, 1000);
+    }
+
+    function handleAuthResult(user, isNewUser) {
+        if (user) {
+            const userName = user.displayName || "User";
+            localStorage.setItem('user', JSON.stringify(user));
+
+            document.querySelector(".welcome .subtext").textContent = userName;
+            document.querySelector(".welcome .welcome-image").src = user.photoURL || "default-profile-image-url";
+            document.querySelector(".welcome").style.display = "flex";
+            document.querySelector(".log").style.display = "none";
+
+            // Redirect based on whether the user is new or returning
             setTimeout(() => {
-                messageElement.classList.remove('show');
-            }, 1000);
+                if (isNewUser) {
+                    window.location.href = 'profile-setup.html'; // Redirect to profile setup
+                } else {
+                    window.location.href = 'home.html'; // Redirect to home
+                }
+            }, 3300);
+        } else {
+            showMessage("Authentication failed. Please try again.");
         }
+    }
 
-        function getCleanUsername(email) {
-            const username = email.split('@')[0];
-            // Extract the part before any numbers or special characters
-            const cleanUsername = username.replace(/[^a-zA-Z]/g, '');
-            return cleanUsername;
-        }
-
-        function handleAuthResult(user, isNewUser) {
-            if (user) {
-                const userEmail = user.email;
-                const userName = getCleanUsername(userEmail); // Get the cleaned username
-                localStorage.setItem('user', JSON.stringify(user));
-
-                // Show personalized welcome message
-                document.querySelector(".welcome .subtext").textContent = userName;
-                document.querySelector(".welcome .welcome-image").src = user.photoURL || "default-profile-image-url"; // Use user's photoURL or a default image
-                document.querySelector(".welcome").style.display = "flex";
-                document.querySelector(".log").style.display = "none";
-
-                // Redirect after 3 seconds
-                setTimeout(() => {
-                    window.location.href = 'home.html';
-                }, 3300);
-            } else {
-                showMessage("Authentication failed. Please try again.");
-            }
-        }
-
-        document.getElementById('login').addEventListener('click', () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => handleAuthResult(userCredential.user, false))
-                .catch((error) => {
-                    console.error('Error during email login:', error);
-                    showMessage("Login failed. Please check your credentials.");
-                });
-        });
-
-        document.getElementById('signup').addEventListener('click', () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => handleAuthResult(userCredential.user, true))
-                .catch((error) => {
-                    console.error('Error during sign up:', error);
-                    showMessage("Sign up failed. This email might already be in use.");
-                });
-        });
-
-        // Check for existing login
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const userEmail = user.email;
-                const userName = getCleanUsername(userEmail); // Get the cleaned username
-
-                document.querySelector(".welcome .subtext").textContent = userName;
-                document.querySelector(".welcome .welcome-image").src = user.photoURL || "default-profile-image-url"; // Use user's photoURL or a default image
-                document.querySelector(".welcome").style.display = "flex";
-                document.querySelector(".log").style.display = "none";
-
-                setTimeout(() => {
-                    window.location.href = 'home.html';
-                }, 3300); // Redirect after welcome message
-            }
-        });
-
-        document.getElementById('logout-button').addEventListener('click', () => {
-            signOut(auth).then(() => {
-                localStorage.removeItem('user');
-                window.location.href = 'index.html';
-            }).catch((error) => {
-                console.error('Error signing out:', error);
+    document.getElementById('login').addEventListener('click', () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => handleAuthResult(userCredential.user, false))
+            .catch((error) => {
+                console.error('Error during email login:', error);
+                showMessage("Login failed. Please check your credentials.");
             });
+    });
+
+    document.getElementById('signup').addEventListener('click', () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => handleAuthResult(userCredential.user, true))
+            .catch((error) => {
+                console.error('Error during sign up:', error);
+                showMessage("Sign up failed. This email might already be in use.");
+            });
+    });
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const userName = user.displayName || "User";
+
+            document.querySelector(".welcome .subtext").textContent = userName;
+            document.querySelector(".welcome .welcome-image").src = user.photoURL || "default-profile-image-url";
+            document.querySelector(".welcome").style.display = "flex";
+            document.querySelector(".log").style.display = "none";
+
+            setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 3300);
+        }
+    });
+
+    document.getElementById('logout-button').addEventListener('click', () => {
+        signOut(auth).then(() => {
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }).catch((error) => {
+            console.error('Error signing out:', error);
         });
+    });
+
     </script>
 </body>
 </html>
