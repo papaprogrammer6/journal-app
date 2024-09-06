@@ -4,7 +4,7 @@
 .iconify{
     transform: scale(2);
 }
-#bar ,.edit-delete button , .event-item button,.shop-item button,.news-item button,#submitEditNews,#cancelEdit,#submitEditArticle,#submitEditEvent,#submitEditShopItem {
+#bar ,.edit-delete button , .event-item button,.shop-item button,.news-item button,#submitEditNews,#submitNews,#submitEvent,#submitShop,#submitArticle,#cancelEdit,#submitEditArticle,#submitEditEvent,#submitEditShopItem {
     font-family: "Zain", sans-serif;
 }
 /* Default styles for larger screens */
@@ -25,7 +25,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        height: 40px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -97,6 +97,6 @@
     display: flex;
     width: 100%;
   }
-textarea,.form-group{
+  textarea,.form-group{
     direction: rtl;
   }
