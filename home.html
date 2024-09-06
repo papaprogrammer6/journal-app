@@ -31,12 +31,14 @@
         }
         .navbar {
             width: 200px;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 100px;
+            z-index: 1000;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
         .navbar ul {
             list-style-type: none;
@@ -86,7 +88,8 @@
                 bottom: 0;
                 left: 0;
                 padding: 10px;
-                box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+                background-color: white;
+                z-index: 1000;
             }
             .navbar ul {
                 display: flex;
