@@ -107,8 +107,28 @@
             margin-bottom: 1px;
         }
      
-        #message ,#made{
-            margin-top: 20px;
+        #message {
+            margin: 20px 0;
+            color: #ffffff;
+            text-align: center;
+            background-color: red;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: 30px;
+            z-index: 10;
+            padding: 23px 0;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        #message.show {
+            opacity: 1;
+        }
+        #made{
+            margin: 20px 0;
             color: #ffffff;
             text-align: center;
         }
@@ -126,33 +146,33 @@
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    <div id="auth-container">
-        <h1>Dashboared</h1>
-        <!-- Email/Password login -->
-        <div id="email-login">
-            <div class="inputs">
-            <input type="email" id="email" placeholder="Email">
-        </div>
-        <div class="inputs">
-            <input type="password" id="password" placeholder="Password">
-        </div>
-            <button id="login">Login</button>
-            <button id="signup">sign up </button>
-        </div>
-        <div id="made">
-            Made by Ayoub & Jesser
-        </div>
-    </div>
-    
-    </div>
-        
-    
-    </div>
+   <div>
+     <div id="message">
   
+     </div>
+     <div class="background">
+         <div class="shape"></div>
+         <div class="shape"></div>
+     </div>
+     <div id="auth-container">
+         <h1>Dashboared</h1>
+         <!-- Email/Password login -->
+         <div id="email-login">
+             <div class="inputs">
+             <input type="email" id="email" placeholder="Email">
+         </div>
+         <div class="inputs">
+             <input type="password" id="password" placeholder="Password">
+         </div>
+             <button id="login">Login</button>
+             <button id="signup">sign up </button>
+         </div>
+         <div id="made">
+             Made by Ayoub & Jesser
+         </div>
+     </div>
+    
+   </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
@@ -175,10 +195,12 @@
         let recaptchaVerifier;
     
         function showMessage(message) {
-            const messageElement = document.getElementById('message') || document.createElement('div');
-            messageElement.id = 'message';
+            const messageElement = document.getElementById('message');
             messageElement.textContent = message;
-            document.body.appendChild(messageElement);
+            messageElement.classList.add('show');
+            setTimeout(() => {
+                messageElement.classList.remove('show');
+            }, 1000);
         }
     
         function handleAuthResult(user, isNewUser) {
